@@ -62,4 +62,19 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function roles()
+    {
+        return $this->belongsTo(Role::class, 'role_user');
+    }
+
+    public function courseEnrollments()
+    {
+        return $this->hasMany(CourseEnrollment::class);
+    }
+
+    public function parentStudents()
+    {
+        return $this->hasMany(ParentStudent::class);
+    }
 }
