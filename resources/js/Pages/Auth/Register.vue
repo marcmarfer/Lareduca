@@ -1,19 +1,11 @@
 <script setup>
-import { Head, Link, useForm } from '@inertiajs/vue3';
-import AuthenticationCard from '@/Components/AuthenticationCard.vue';
-import AuthenticationCardLogo from '@/Components/AuthenticationCardLogo.vue';
-import Checkbox from '@/Components/Checkbox.vue';
-import InputError from '@/Components/InputError.vue';
-import InputLabel from '@/Components/InputLabel.vue';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
-import TextInput from '@/Components/TextInput.vue';
+import { useForm } from '@inertiajs/vue3';
 
 const form = useForm({
-    name: '',
+    username: '',
     email: '',
     password: '',
     password_confirmation: '',
-    terms: false,
 });
 
 const submit = () => {
@@ -24,89 +16,131 @@ const submit = () => {
 </script>
 
 <template>
-    <Head title="Register" />
+    <div class="gradient-background">
+        <div class="general-container">
+            <img src="/imgs/logo.svg" alt="Logo Lareduca" class="logo-image">
+            <form @submit.prevent="submit" class="custom-form">
+                <div>
+                    <label for="username" class="label">Username</label>
+                    <input
+                        id="username"
+                        v-model="form.username"
+                        type="text"
+                        class="input"
+                        required
+                        autofocus
+                        autocomplete="username"
+                    />
+                    <span class="error">{{ form.errors.username }}</span>
+                </div>
 
-    <AuthenticationCard>
-        <template #logo>
-            <AuthenticationCardLogo />
-        </template>
+                <div class="mt-4">
+                    <label for="email" class="label">Email</label>
+                    <input
+                        id="email"
+                        v-model="form.email"
+                        type="email"
+                        class="input"
+                        required
+                        autocomplete="username"
+                    />
+                    <span class="error">{{ form.errors.email }}</span>
+                </div>
 
-        <form @submit.prevent="submit">
-            <div>
-                <InputLabel for="name" value="Name" />
-                <TextInput
-                    id="name"
-                    v-model="form.name"
-                    type="text"
-                    class="mt-1 block w-full"
-                    required
-                    autofocus
-                    autocomplete="name"
-                />
-                <InputError class="mt-2" :message="form.errors.name" />
-            </div>
+                <div class="mt-4">
+                    <label for="password" class="label">Password</label>
+                    <input
+                        id="password"
+                        v-model="form.password"
+                        type="password"
+                        class="input"
+                        required
+                        autocomplete="new-password"
+                    />
+                    <span class="error">{{ form.errors.password }}</span>
+                </div>
 
-            <div class="mt-4">
-                <InputLabel for="email" value="Email" />
-                <TextInput
-                    id="email"
-                    v-model="form.email"
-                    type="email"
-                    class="mt-1 block w-full"
-                    required
-                    autocomplete="username"
-                />
-                <InputError class="mt-2" :message="form.errors.email" />
-            </div>
+                <div class="mt-4">
+                    <label for="password_confirmation" class="label">Confirm Password</label>
+                    <input
+                        id="password_confirmation"
+                        v-model="form.password_confirmation"
+                        type="password"
+                        class="input"
+                        required
+                        autocomplete="new-password"
+                    />
+                    <span class="error">{{ form.errors.password_confirmation }}</span>
+                </div>
 
-            <div class="mt-4">
-                <InputLabel for="password" value="Password" />
-                <TextInput
-                    id="password"
-                    v-model="form.password"
-                    type="password"
-                    class="mt-1 block w-full"
-                    required
-                    autocomplete="new-password"
-                />
-                <InputError class="mt-2" :message="form.errors.password" />
-            </div>
-
-            <div class="mt-4">
-                <InputLabel for="password_confirmation" value="Confirm Password" />
-                <TextInput
-                    id="password_confirmation"
-                    v-model="form.password_confirmation"
-                    type="password"
-                    class="mt-1 block w-full"
-                    required
-                    autocomplete="new-password"
-                />
-                <InputError class="mt-2" :message="form.errors.password_confirmation" />
-            </div>
-
-            <div v-if="$page.props.jetstream.hasTermsAndPrivacyPolicyFeature" class="mt-4">
-                <InputLabel for="terms">
-                    <div class="flex items-center">
-                        <Checkbox id="terms" v-model:checked="form.terms" name="terms" required />
-
-                        <div class="ms-2">
-                            I agree to the <a target="_blank" :href="route('terms.show')" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Terms of Service</a> and <a target="_blank" :href="route('policy.show')" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Privacy Policy</a>
-                        </div>
-                    </div>
-                    <InputError class="mt-2" :message="form.errors.terms" />
-                </InputLabel>
-            </div>
-
-            <div class="flex items-center justify-end mt-4">
-                <Link :href="route('login')" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                    Already registered?
-                </Link>
-
-                <PrimaryButton class="ms-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    Register
-                </PrimaryButton>
-            </div>
-        </form>
-    </AuthenticationCard>
+                <div class="mt-4">
+                    <button type="submit" class="button" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                        Register
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
 </template>
+
+<style scoped>
+.gradient-background {
+    background: linear-gradient(45deg, #0C0F14, #444769);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.general-container {
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+}
+
+.logo-image {
+    height: 10rem;
+    width: 10rem;
+    background-color: #D9D9D9;
+    border-radius: 50%;
+}
+
+.custom-form {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: white;
+}
+
+.input {
+    width: 100%;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border-radius: 0.25rem;
+    border: 1px solid #ccc;
+}
+
+.error {
+    color: #ff4444;
+    font-size: 0.8rem;
+}
+
+.button {
+    width: 100%;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 0.25rem;
+    background-color: #FF4565;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.button:hover {
+    background-color: #D80036;
+}
+</style>
