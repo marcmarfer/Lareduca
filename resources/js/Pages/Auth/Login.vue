@@ -1,5 +1,6 @@
 <script setup>
 import { Head, Link, useForm } from '@inertiajs/vue3';
+import Checkbox from '@/Components/Checkbox.vue';
 
 defineProps({
     canResetPassword: Boolean,
@@ -23,53 +24,42 @@ const submit = () => {
 </script>
 
 <template>
+
+    <Head title="Log in" />
     <div class="gradient-background">
         <div class="general-container">
             <img src="/imgs/logo.svg" alt="Logo Lareduca" class="logo-image">
-            <h1>Lar<span class="rojo">educa</span></h1>
+            <h1>Lar<span class="red">educa</span></h1>
             <form @submit.prevent="submit" class="custom-form">
                 <div>
                     <label for="email" class="label">Email</label>
-                    <input
-                        id="email"
-                        v-model="form.email"
-                        type="email"
-                        class="input"
-                        required
-                        autofocus
-                        autocomplete="username"
-                    />
+                    <input id="email" v-model="form.email" type="email" class="input" required autofocus
+                        autocomplete="username" />
                     <span class="error">{{ form.errors.email }}</span>
                 </div>
 
                 <div class="mt-4">
                     <label for="password" class="label">Password</label>
-                    <input
-                        id="password"
-                        v-model="form.password"
-                        type="password"
-                        class="input"
-                        required
-                        autocomplete="current-password"
-                    />
+                    <input id="password" v-model="form.password" type="password" class="input" required
+                        autocomplete="current-password" />
                     <span class="error">{{ form.errors.password }}</span>
                 </div>
 
-                <div class="block mt-4">
-                    <label class="flex items-center">
-                        <Checkbox v-model:checked="form.remember" name="remember" />
-                        <span class="ms-2 text-sm text-gray-600">Remember me</span>
+                <div class="flex items-center mt-4">
+                    <label class="checkbox-label flex items-center">
+                        <Checkbox v-model:checked="form.remember" name="remember" class="checkbox-input" />
+                        <span class="checkbox-span">Remember me</span>
                     </label>
+                    <Link v-if="canResetPassword" :href="route('password.request')"
+                        class="forgot-password-link ml-auto">
+                    Forgot your password?
+                    </Link>
                 </div>
 
-                <div class="flex items-center justify-end mt-4">
-                    <Link v-if="canResetPassword" :href="route('password.request')" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                        Forgot your password?
-                    </Link>
-
-                    <PrimaryButton class="ms-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                <div class="flex justify-center mt-7">
+                    <button class="button" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                         Log in
-                    </PrimaryButton>
+                    </button>
                 </div>
             </form>
         </div>
@@ -79,12 +69,11 @@ const submit = () => {
 <style scoped>
 h1 {
     font-size: 5rem;
-    letter-spacing: 0.25rem;
     color: white;
-    margin: 20px 0px 20px 0px;
+    margin: 10px 0px 10px 0px;
 }
 
-.rojo {
+.red {
     color: #FF4565;
 }
 
@@ -102,7 +91,6 @@ h1 {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    font-family: 'Poppins', sans-serif;
     color: white;
 }
 
@@ -130,6 +118,8 @@ h1 {
     font-size: 1rem;
     background-color: #8D99AE;
     color: white;
+    border: none;
+    border-radius: 0.25rem;
 }
 
 .error {
@@ -138,18 +128,43 @@ h1 {
 }
 
 .button {
-    width: 100%;
-    padding: 0.5rem;
-    font-size: 1rem;
-    border: none;
-    border-radius: 0.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    color: #fff;
     background-color: #FF4565;
-    color: white;
-    cursor: pointer;
+    border: 1px solid transparent;
     transition: background-color 0.3s ease;
+    width: 12rem;
+    height: 3rem;
+    cursor: pointer;
 }
 
 .button:hover {
     background-color: #D80036;
+}
+
+
+.forgot-password-link {
+    text-decoration: none;
+    color: white;
+    font-size: 1rem;
+    transition: color 0.2s ease;
+}
+
+.forgot-password-link:hover {
+    color: #FF4565;
+}
+
+.checkbox-label,
+.checkbox-input {
+    cursor: pointer;
+}
+
+.checkbox-span {
+    margin-left: 0.5rem;
 }
 </style>

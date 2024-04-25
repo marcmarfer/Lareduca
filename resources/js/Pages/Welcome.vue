@@ -1,25 +1,27 @@
 <script setup>
-  import { Head, Link } from '@inertiajs/vue3';
+import { Link } from '@inertiajs/vue3';
 
-  defineProps({
-    canLogin: {
-      type: Boolean,
-    },
-    canRegister: {
-      type: Boolean,
-    }
-  });
+defineProps({
+  canLogin: {
+    type: Boolean,
+  },
+  canRegister: {
+    type: Boolean,
+  }
+});
 </script>
 
 <template>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-  
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet">
+
   <div class="gradient-background">
     <div class="general-container">
       <img src="/imgs/logo.svg" alt="Logo Lareduca" class="logo-image">
-      <h1>Bienvenido al portal de Lareduca!</h1>      
+      <h1>Bienvenido al portal de Lareduca!</h1>
       <div class="button-container">
         <nav v-if="canLogin">
           <Link :href="route('login')" class="login-button">Log in</Link>
@@ -38,12 +40,9 @@ h1 {
   margin: 20px 0px 20px 0px;
 }
 
-.logo-image {
-  color: white;
-  height: 10rem;
-  width: 10rem;
-  background-color: #D9D9D9;
-  border-radius: 50%;
+nav {
+  display: flex;
+  gap: 20px;
 }
 
 .general-container {
@@ -61,15 +60,20 @@ h1 {
   align-items: center;
 }
 
-.button-container {
-  text-align: center;
+.logo-image {
+  color: white;
+  height: 10rem;
+  width: 10rem;
+  background-color: #D9D9D9;
+  border-radius: 50%;
 }
 
 .login-button,
 .register-button {
-  display: inline-block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 10px;
-  margin: 10px;
   border-radius: 5px;
   text-decoration: none;
   color: #fff;
@@ -78,7 +82,6 @@ h1 {
   transition: background-color 0.3s ease;
   width: 12rem;
   height: 3rem;
-  text-align: center;
 }
 
 .login-button:hover,
