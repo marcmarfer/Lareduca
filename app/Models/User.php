@@ -65,16 +65,27 @@ class User extends Authenticatable
 
     public function roles()
     {
-        return $this->belongsTo(Role::class, 'role_user');
+        return $this->belongsToMany(Role::class, 'role_users');
     }
 
-    public function courseEnrollments()
+    // When creating a user, set student role by default
+    public static function boot()
     {
-        return $this->hasMany(CourseEnrollment::class);
+        parent::boot();
+        static::created(function ($user) {
+            $user->roles()->attach(Role::where('name', 'student')->first());
+        });
     }
 
-    public function parentStudents()
+    //Get all users with their roles
+    public static function getUsersWithRoles()
     {
-        return $this->hasMany(ParentStudent::class);
+        return static::with('roles')->get();
     }
+
+    public function courses()
+    {
+        return $this->belongsToMany(Course::class, 'course_enrollments')->withTimestamps();
+    }
+
 }
