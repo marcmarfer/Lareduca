@@ -32,26 +32,26 @@ const logout = () => {
         <NavLink :href="route('dashboard')" :active="route().current('dashboard')" class="navigation-links">
           Home
         </NavLink>
-        <NavLink :href="route('dashboard.user-management')" :active="route().current('dashboard.user-management')"
+        <NavLink :href="route('user-management')" :active="route().current('user-management')"
           class="navigation-links">
           User Management
         </NavLink>
-        <NavLink :href="route('dashboard.statistics')" :active="route().current('dashboard.statistics')"
+        <NavLink :href="route('statistics')" :active="route().current('statistics')"
           class="navigation-links">
           Statistics
         </NavLink>
-        <NavLink :href="route('dashboard.courses')" :active="route().current('dashboard.courses')"
+        <NavLink :href="route('courses')" :active="route().current('courses')"
           class="navigation-links">
           Courses
         </NavLink>
-        <NavLink :href="route('dashboard.tasks')" :active="route().current('dashboard.tasks')" class="navigation-links">
+        <NavLink :href="route('tasks')" :active="route().current('tasks')" class="navigation-links">
           Tasks
         </NavLink>
-        <NavLink :href="route('dashboard.grades')" :active="route().current('dashboard.grades')"
+        <NavLink :href="route('grades')" :active="route().current('grades')"
           class="navigation-links">
           Grades
         </NavLink>
-        <NavLink :href="route('dashboard.contacts')" :active="route().current('dashboard.contacts')"
+        <NavLink :href="route('contacts')" :active="route().current('contacts')"
           class="navigation-links">
           Contacts
         </NavLink>
@@ -78,10 +78,8 @@ const logout = () => {
     </nav>
 
     <div class="flex flex-col flex-1">
-      <main class="py-12 px-4 flex-1">
-        <div class="max-w-7xl mx-auto">
+      <main class="py-4 px-4 flex-1">
           <slot />
-        </div>
       </main>
     </div>
   </div>

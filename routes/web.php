@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CourseController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -14,6 +15,10 @@ Route::get('/', function () {
     ]);
 });
 
+Route::patch('/api/update-user', [UserController::class, 'update'])->name('update-user');
+
+Route::post('/api/enroll-user', [CourseController::class, 'enrollUser'])->name('enroll-user');
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
@@ -26,30 +31,27 @@ Route::middleware([
     Route::prefix('/dashboard')->group(function () {
         Route::get('/home', function () {
             return Inertia::render('Home');
-        })->name('dashboard.home');
+        })->name('home');
 
-        Route::get('/user-management', [UserController::class, 'index'])->name('dashboard.user-management');
-        Route::patch('/user-management/update', [UserController::class, 'update'])->name('dashboard.user-management.update');
+        Route::get('/user-management', [UserController::class, 'index'])->name('user-management');
 
         Route::get('/statistics', function () {
             return Inertia::render('Statistics');
-        })->name('dashboard.statistics');
+        })->name('statistics');
 
-        Route::get('/courses', function () {
-            return Inertia::render('Courses');
-        })->name('dashboard.courses');
+        Route::get('/courses', [CourseController::class, 'index'])->name('courses');
 
         Route::get('/tasks', function () {
             return Inertia::render('Tasks');
-        })->name('dashboard.tasks');
+        })->name('tasks');
 
         Route::get('/grades', function () {
             return Inertia::render('Grades');
-        })->name('dashboard.grades');
+        })->name('grades');
 
         Route::get('/contacts', function () {
             return Inertia::render('Contacts');
-        })->name('dashboard.contacts');
+        })->name('contacts');
     });
 });
 
