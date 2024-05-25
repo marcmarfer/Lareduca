@@ -13,6 +13,15 @@ return new class extends Migration
     {
         Schema::create('assignments', function (Blueprint $table) {
             $table->id();
+            $table->string('title');
+            $table->text('description')->nullable();
+            $table->dateTime('due_date')->nullable();
+            $table->foreignId('course_id')->constrained()->onDelete('cascade');
+            $table->decimal('total_points', 2, 2)->nullable();
+            $table->enum('status', ['pending', 'completed', 'graded'])->default('pending');
+            $table->foreignId('assigned_by')->constrained('users')->onDelete('cascade');
+            $table->string('file_attachment')->nullable();
+            $table->enum('assignment_type', ['homework', 'project', 'quiz', 'exam', 'game']);
             $table->timestamps();
         });
     }

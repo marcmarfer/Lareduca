@@ -13,8 +13,16 @@ return new class extends Migration
     {
         Schema::create('educational_games', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->text('description')->nullable();
+            $table->string('subject');
+            $table->string('grade_level');
+            $table->string('file_attachment')->nullable();
+            $table->foreignId('created_by')->constrained('users')->onDelete('cascade');
+            $table->enum('status', ['active', 'inactive'])->default('active');
             $table->timestamps();
         });
+        
     }
 
     /**

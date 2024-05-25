@@ -29,7 +29,6 @@
 
 <script setup>
 import AppLayout from '@/Layouts/AppLayout.vue';
-import { defineProps } from 'vue';
 import axios from 'axios';
 
 const props = defineProps({
