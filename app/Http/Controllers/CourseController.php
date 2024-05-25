@@ -19,6 +19,14 @@ class CourseController extends Controller
         ]);
     }
 
+    public function tasks() {
+        $userCourses = auth()->user()->courses;
+
+        return Inertia::render('Tasks', [
+            'userCourses' => $userCourses,
+        ]);
+    }
+
     public function enrollUser(Request $request)
     {
         $courseId = $request->input('courseId');

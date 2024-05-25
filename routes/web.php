@@ -41,9 +41,7 @@ Route::middleware([
 
         Route::get('/courses', [CourseController::class, 'index'])->name('courses');
 
-        Route::get('/tasks', function () {
-            return Inertia::render('Tasks');
-        })->name('tasks');
+        Route::get('/tasks', [CourseController::class, 'tasks'])->name('tasks');
 
         Route::get('/grades', function () {
             return Inertia::render('Grades');
