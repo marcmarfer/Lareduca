@@ -1,10 +1,6 @@
 <template>
     <div>
         <AppLayout title="Dashboard">
-            <link rel="preconnect" href="https://fonts.googleapis.com">
-            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-            <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-            <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
             <div class="courses-main-container">
                 <h1>Cursos disponibles:</h1>
                 <div class="courses-general-container">
@@ -20,12 +16,14 @@
                     <div class="courses-containers" v-for="course in userCourses" :key="course.id">
                         <span style="font-weight: 600; font-size: 1.75rem;">{{ course.name }}</span>
                         <span style="font-size: 1.35rem; text-align:center">{{ course.description }}</span>
+                        <button @click="unenrollUser(course.id)">Cancelar inscripción</button>
                     </div>
                 </div>
             </div>
         </AppLayout>
     </div>
 </template>
+
 
 <script setup>
 import AppLayout from '@/Layouts/AppLayout.vue';
@@ -39,6 +37,16 @@ const props = defineProps({
 const enrollUser = async (courseId) => {
     try {
         const response = await axios.post('/api/enroll-user', { courseId });
+        console.log(response.data);
+        window.location.reload();
+    } catch (error) {
+        console.error(error);
+    }
+};
+
+const unenrollUser = async (courseId) => {
+    try {
+        const response = await axios.post('/api/unenroll-user', { courseId });
         console.log(response.data);
         window.location.reload();
     } catch (error) {

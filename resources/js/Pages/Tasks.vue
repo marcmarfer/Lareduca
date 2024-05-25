@@ -1,16 +1,20 @@
 <template>
     <div>
         <AppLayout title="Dashboard">
-            <link rel="preconnect" href="https://fonts.googleapis.com">
-            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-            <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap" rel="stylesheet">
-            <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-            <div class="courses-main-container">
+            <div class="tasks-main-container">
                 <h1>Mis cursos:</h1>
                 <div class="courses-general-container">
                     <div class="courses-containers" v-for="course in userCourses" :key="course.id">
                         <span style="font-weight: 600; font-size: 1.75rem;">{{ course.name }}</span>
                         <span style="font-size: 1.35rem; text-align:center">{{ course.description }}</span>
+                    </div>
+                </div>
+                
+                <h1>Juegos educativos:</h1>
+                <div class="educational-games-general-container">
+                    <div class="educational-games-containers" v-for="game in educationalGames" :key="game.id">
+                        <span style="font-weight: 600; font-size: 1.75rem;">{{ game.name }}</span>
+                        <span style="font-size: 1.35rem; text-align:center">{{ game.description }}</span>
                     </div>
                 </div>
             </div>
@@ -19,11 +23,13 @@
 </template>
 
 
+
 <script setup>
 import AppLayout from '@/Layouts/AppLayout.vue';
 
 const props = defineProps({
-    userCourses: Array
+    userCourses: Array,
+    educationalGames: Array
 });
 </script>
 
@@ -36,13 +42,13 @@ h1 {
     margin-bottom: 20px;
 }
 
-.courses-main-container {
+.tasks-main-container {
     background-color: #2B2D42;
     padding: 2rem;
     border-radius: 10px;
 }
 
-.courses-general-container {
+.courses-general-container, .educational-games-general-container {
     display: flex;
     flex-wrap: wrap;
     gap: 30px;
@@ -51,7 +57,7 @@ h1 {
     font-family: 'Poppins', sans-serif;
 }
 
-.courses-containers {
+.courses-containers, .educational-games-containers {
     border-radius: 10px;
     display: flex;
     flex-direction: column;

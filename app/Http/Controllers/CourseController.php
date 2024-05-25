@@ -19,14 +19,6 @@ class CourseController extends Controller
         ]);
     }
 
-    public function tasks() {
-        $userCourses = auth()->user()->courses;
-
-        return Inertia::render('Tasks', [
-            'userCourses' => $userCourses,
-        ]);
-    }
-
     public function enrollUser(Request $request)
     {
         $courseId = $request->input('courseId');
@@ -34,5 +26,14 @@ class CourseController extends Controller
         auth()->user()->courses()->attach($courseId);
 
         return response()->json(['message' => 'Usuario inscrito correctamente en el curso']);
+    }
+
+    public function unenrollUser(Request $request)
+    {
+        $courseId = $request->input('courseId');
+
+        auth()->user()->courses()->detach($courseId);
+
+        return response()->json(['message' => 'Usuario desinscrito correctamente del curso']);
     }
 }
