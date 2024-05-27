@@ -22,6 +22,12 @@ Route::post('/api/enroll-user', [CourseController::class, 'enrollUser'])->name('
 
 Route::post('/api/unenroll-user', [CourseController::class, 'unenrollUser'])->name('unenroll-user');
 
+Route::delete('/api/delete-assignment/{id}', [TaskController::class, 'deleteAssignment'])->name('delete-assignment');
+
+Route::post('/api/add-assignment', [TaskController::class, 'addAssignment'])->name('add-assignment');
+
+Route::get('/api/user-logged-in', [UserController::class, 'getUserLoggedIn'])->name('user-logged-in');
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
@@ -45,6 +51,11 @@ Route::middleware([
         Route::get('/courses', [CourseController::class, 'index'])->name('courses');
 
         Route::get('/tasks', [TaskController::class, 'index'])->name('tasks');
+
+        Route::get('/courses/{id}', [TaskController::class, 'showCourseDetails'])->name('courses.show');
+        Route::get('/games/{id}', [TaskController::class, 'showGameDetails'])->name('games.show');
+
+        Route::get('/courses/{id}/add-assignment', [TaskController::class, 'showAddAssignment'])->name('add-assignment.show');
 
         Route::get('/grades', function () {
             return Inertia::render('Grades');

@@ -7,7 +7,7 @@
                     <div class="courses-containers" v-for="course in availableCourses" :key="course.id">
                         <span style="font-weight: 600; font-size: 1.75rem;">{{ course.name }}</span>
                         <span style="font-size: 1.35rem; text-align:center">{{ course.description }}</span>
-                        <button @click="enrollUser(course.id)">Inscribirse</button>
+                        <button @click="enrollUser(course.id)">Subscribe</button>
                     </div>
                 </div>
 
@@ -16,7 +16,7 @@
                     <div class="courses-containers" v-for="course in userCourses" :key="course.id">
                         <span style="font-weight: 600; font-size: 1.75rem;">{{ course.name }}</span>
                         <span style="font-size: 1.35rem; text-align:center">{{ course.description }}</span>
-                        <button @click="unenrollUser(course.id)">Cancelar inscripción</button>
+                        <button @click="unenrollUser(course.id)">Unsubscribe</button>
                     </div>
                 </div>
             </div>

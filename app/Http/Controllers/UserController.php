@@ -23,4 +23,10 @@ class UserController extends Controller
         $user->update($request->all());
         return redirect()->back()->with('success', 'Usuario actualizado correctamente');
     }
+
+    public function getUserLoggedIn()
+    {
+        $user = auth()->user();
+        return response()->json($user);
+    }
 }
