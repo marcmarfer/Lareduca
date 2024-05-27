@@ -107,7 +107,7 @@ p {
   padding: 2rem;
   border-radius: 10px;
   font-family: 'Poppins', sans-serif;
-  max-height: 95vh;
+  max-height: 96.5vh;
   overflow: auto;
 }
 
