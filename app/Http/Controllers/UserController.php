@@ -9,14 +9,6 @@ use Inertia\Inertia;
 
 class UserController extends Controller
 {
-    public function index()
-    {
-        $users = User::getUsersWithRoles();
-        return Inertia::render('UserManagement', [
-            'users' => $users
-        ]);
-    }
-
     public function update(Request $request, $userId)
     {
         $user = User::findOrFail($userId);

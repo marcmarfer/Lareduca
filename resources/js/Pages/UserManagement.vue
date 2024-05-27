@@ -1,5 +1,6 @@
 <script setup>
 import AppLayout from '@/Layouts/AppLayout.vue';
+import { defineProps } from 'vue';
 
 const formatRoles = (roles) => {
     if (!roles || roles.length === 0) {
@@ -10,15 +11,13 @@ const formatRoles = (roles) => {
 
 const props = defineProps({
     users: Array,
+    currentUserRole: Array
 });
 </script>
 
 <template>
     <AppLayout title="Dashboard">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-        <div>
+        <div v-if="currentUserRole.some(role => role.name === 'admin')">
             <button>New User</button>
             <table>
                 <thead>
@@ -42,8 +41,12 @@ const props = defineProps({
                 </tbody>
             </table>
         </div>
+        <div v-else>
+            <p>You have no permissions to see this view!</p>
+        </div>
     </AppLayout>
 </template>
+
 
 <style scoped>
 table {

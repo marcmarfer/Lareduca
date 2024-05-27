@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\UserManagementController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Foundation\Application;
@@ -38,7 +39,7 @@ Route::middleware([
 
     Route::prefix('/dashboard')->group(function () {
 
-        Route::get('/user-management', [UserController::class, 'index'])->name('user-management');
+        Route::get('/user-management', [UserManagementController::class, 'index'])->name('user-management');
 
         Route::get('/statistics', function () {
             return Inertia::render('Statistics');
