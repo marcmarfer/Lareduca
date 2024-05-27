@@ -23,7 +23,7 @@ class TaskController extends Controller
     public function showCourseDetails($id) {
         $user = auth()->user();
         $course = Course::findOrFail($id);
-        $assignments = $course->assignments()->where('assigned_by', $user->id)->get();
+        $assignments = $course->assignments()->get();
     
         return Inertia::render('CourseDetails', [
             'course' => $course,

@@ -14,6 +14,7 @@
                 <h3>{{ assignment.title }}</h3>
                 <p>{{ assignment.description }}</p>
                 <p>Due Date: {{ assignment.due_date }}</p>
+                <p>Assigned by: {{ assignedByNames[assignment.assigned_by] }}</p>
                 <button class="delete-assignment-button" @click="deleteAssignment(assignment.id)">Delete assignment</button>
               </div>
             </div>
@@ -27,12 +28,42 @@
 </template>
   
 <script setup>
+import { ref, onMounted } from 'vue';
 import AppLayout from '@/Layouts/AppLayout.vue';
 import axios from 'axios';
 
 const props = defineProps({
   course: Object,
   assignments: Array
+});
+
+const assignedByNames = ref({});
+
+const getUserById = async (userId) => {
+  try {
+    const response = await axios.get(`/api/users/${userId}`);
+    return response.data.name;
+  } catch (error) {
+    console.error(`Error fetching user with ID ${userId}:`, error);
+    return 'Unknown';
+  }
+};
+
+const fetchAssignedByNames = async () => {
+  const userIds = [...new Set(props.assignments.map(a => a.assigned_by))];
+  for (const userId of userIds) {
+    if (!assignedByNames.value[userId]) {
+      const userName = await getUserById(userId);
+      assignedByNames.value = {
+        ...assignedByNames.value,
+        [userId]: userName
+      };
+    }
+  }
+};
+
+onMounted(() => {
+  fetchAssignedByNames();
 });
 
 const deleteAssignment = async (assignmentId) => {

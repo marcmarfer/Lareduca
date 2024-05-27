@@ -30,6 +30,8 @@ Route::post('/api/add-assignment', [TaskController::class, 'addAssignment'])->na
 
 Route::get('/api/user-logged-in', [UserController::class, 'getUserLoggedIn'])->name('user-logged-in');
 
+Route::get('/api/users/{userId}', [UserController::class, 'getUserById'])->name('user');
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),

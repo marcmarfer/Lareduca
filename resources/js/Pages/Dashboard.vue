@@ -92,5 +92,10 @@ img {
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.courses-containers:hover {
+    transform: scale(1.05);
 }
 </style>
