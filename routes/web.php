@@ -32,6 +32,14 @@ Route::get('/api/user-logged-in', [UserController::class, 'getUserLoggedIn'])->n
 
 Route::get('/api/users/{userId}', [UserController::class, 'getUserById'])->name('user');
 
+Route::post('/api/add-user', [UserManagementController::class, 'addUser'])->name('add-user');
+
+Route::delete('/api/delete-user/{id}', [UserManagementController::class, 'deleteUser'])->name('delete-user');
+
+Route::delete('/api/delete-role/{userId}/roles', [UserManagementController::class, 'deleteRole'])->name('delete-role');
+
+Route::delete('/api/delete-course-enrollments/{userId}/courses', [UserManagementController::class, 'deleteCourseEnrollments'])->name('delete-course-enrollments');
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),

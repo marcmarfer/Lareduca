@@ -67,6 +67,8 @@ h1 {
     background-color: #2B2D42;
     padding: 2rem;
     border-radius: 10px;
+    height: 96.5vh;
+    overflow: auto;
 }
 
 .courses-general-container {

@@ -4,7 +4,7 @@
         <main class="tasks-main-container">
           <div class="top-container">
             <h1>{{ course.name }}</h1>
-            <button class="add-assignment-button"><a :href="`/dashboard/courses/${course.id}/add-assignment`">Add assignment</a></button>
+            <button v-if="currentUserRole.some(role => role.name === 'admin')" class="add-assignment-button"><a :href="`/dashboard/courses/${course.id}/add-assignment`">Add assignment</a></button>
           </div>
   
           <div v-if="assignments.length">
@@ -15,7 +15,7 @@
                 <p>{{ assignment.description }}</p>
                 <p>Due Date: {{ assignment.due_date }}</p>
                 <p>Assigned by: {{ assignedByNames[assignment.assigned_by] }}</p>
-                <button class="delete-assignment-button" @click="deleteAssignment(assignment.id)">Delete assignment</button>
+                <button v-if="currentUserRole.some(role => role.name === 'admin')" class="delete-assignment-button" @click="deleteAssignment(assignment.id)">Delete assignment</button>
               </div>
             </div>
           </div>
@@ -34,7 +34,8 @@ import axios from 'axios';
 
 const props = defineProps({
   course: Object,
-  assignments: Array
+  assignments: Array,
+  currentUserRole: Array
 });
 
 const assignedByNames = ref({});

@@ -21,16 +21,16 @@ class TaskController extends Controller
     }
 
     public function showCourseDetails($id) {
-        $user = auth()->user();
+        $userRole = auth()->user()->roles;
         $course = Course::findOrFail($id);
         $assignments = $course->assignments()->get();
     
         return Inertia::render('CourseDetails', [
             'course' => $course,
             'assignments' => $assignments,
+            'currentUserRole' => $userRole,
         ]);
     }
-
 
     public function showGameDetails($id) {
         $educationalGame = EducationalGame::findOrFail($id);

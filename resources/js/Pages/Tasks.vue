@@ -47,6 +47,8 @@ h1 {
   background-color: #2B2D42;
   padding: 2rem;
   border-radius: 10px;
+  overflow: auto;
+  height: 96.5vh;
 }
   
 .courses-general-container, .educational-games-general-container {
